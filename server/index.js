@@ -6,6 +6,7 @@ const path = require('path')
 
 const app = express()
 const productsRoute = require('./routes/products')
+const usersRoute = require('./routes/users')
 
 mongoose.connect(config.DB_URI).then(
   () => {
@@ -16,7 +17,12 @@ mongoose.connect(config.DB_URI).then(
   }
 )
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 app.use('/api/v1/products', productsRoute)
+app.use('/api/v1/users', usersRoute)
+
 
 // app.get('/products',function(req, res){
 //   res.json({'success': true})
