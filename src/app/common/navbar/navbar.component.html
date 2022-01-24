@@ -32,7 +32,18 @@
               <span class="navbar-toggler-bar"></span>
           </button>
       </div>
+
       <div class="navbar-collapse" id="navbarToggler">
+        <!-- ログイン中はログアウトボタンを表示 -->
+        <ng-container *ngIf="auth.isAuthenticated()">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a (click)="logout()" class="nav-link"><i class="nc-icon nc-book-bookmark"></i> ログアウト</a>
+            </li>
+          </ul>
+        </ng-container>
+        <!-- ログアウト時はログインと登録ボタンを表示 -->
+        <ng-container *ngIf="!auth.isAuthenticated()">
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                   <!-- <a href="http://pk2-angular.creative-tim.com/documentation/tutorial" class="nav-link" target="_blank"><i class="nc-icon nc-book-bookmark"></i> ログイン</a> -->
@@ -48,6 +59,7 @@
                   <a [routerLink]="['/home']" class="nav-link">Back to Kit</a>
               </li> -->
           </ul>
+        </ng-container>
       </div>
   </div>
 </nav>
